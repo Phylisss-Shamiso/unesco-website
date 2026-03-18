@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Search, Facebook, Instagram, Linkedin, Youtube, Twitter, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,157 +26,125 @@ const socialLinks = [
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const isActive = (path: string) => location.pathname === path || (path !== "/" && location.pathname.startsWith(path));
 
   return (
-    <header className="sticky top-0 z-50">
-      {/* Premium top bar — brushed metal */}
-      <div className="brushed-metal relative">
-        <div className="container flex items-center justify-between py-2.5 relative z-10">
-          {/* Full branded name */}
-          <Link to="/" className="flex items-center gap-4 group" aria-label="Home">
-            {/* Replaced UN text with UNESCO Logo Icon */}
-            <div className="flex items-center justify-center">
-              <img 
-                src="https://www.unesco.org/sites/default/files/styles/paragraph_medium_desktop/public/2021-10/UNESCO_logo_hor_blue_transparent.png.webp?itok=j_ahsDi8" 
-                alt="UNESCO Logo" 
-                className="h-10 w-auto object-contain brightness-0 invert" 
-              />
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "shadow-lg" : ""}`}>
+      {/* Top Bar: Official Branding & Contact */}
+      <div className="bg-gradient-to-r from-[#003366] via-[#004080] to-[#003366] text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
+        
+        <div className="container flex items-center justify-between py-3 relative z-10">
+          <div className="flex items-center gap-5">
+            <div className="flex items-center gap-3 bg-white/10 p-2 rounded-lg backdrop-blur-md border border-white/20 shadow-inner">
+              {/* Zimbabwe Coat of Arms - External Link */}
+              <a 
+                href="https://mhtestd.gov.zw/?ova_dep=zimbabwe-national-commission-for-unesco" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="transition-transform hover:scale-105 shrink-0"
+              >
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/0/01/Coat_of_arms_of_Zimbabwe.svg" 
+                  alt="Zimbabwe Coat of Arms" 
+                  className="h-9 w-auto drop-shadow-md sm:h-12" 
+                />
+              </a>
+
+              {/* Single Vertical Divider */}
+              <div className="h-8 w-px bg-white/30" />
+
+              {/* UNESCO Logo - Internal Link to Home */}
+              <Link to="/" className="flex items-center transition-opacity hover:opacity-80">
+                <img 
+                  src="https://www.unesco.org/sites/default/files/styles/paragraph_medium_desktop/public/2021-10/UNESCO_logo_hor_blue_transparent.png.webp?itok=j_ahsDi8" 
+                  alt="UNESCO Logo" 
+                  className="h-8 w-auto object-contain brightness-0 invert" 
+                />
+              </Link>
             </div>
-            <div className="hidden md:block">
-              <span className="font-humanist text-sm md:text-base font-bold text-primary-foreground tracking-wide leading-tight block">
+            
+            {/* Branding Text - Internal Link to Home */}
+            <Link to="/" className="hidden md:block transition-colors hover:text-white/80">
+              <span className="font-serif text-sm md:text-lg font-bold tracking-tight block leading-tight">
                 Zimbabwe National Commission for UNESCO
               </span>
-              <span className="font-humanist text-[11px] text-primary-foreground/60 tracking-widest uppercase">
-                Official Secretariat
-              </span>
-            </div>
-          </Link>
+            </Link>
+          </div>
 
-          {/* Contact + Social */}
-          <div className="hidden lg:flex items-center gap-6">
-            {/* Contact */}
-            <div className="flex items-center gap-4 text-xs text-primary-foreground/80">
-              <a href="mailto:info@unesco.org.zw" className="flex items-center gap-1.5 hover:text-primary-foreground transition-colors">
-                <Mail className="h-3.5 w-3.5" />
-                info@unesco.org.zw
+          <div className="hidden lg:flex flex-col items-end gap-1">
+            <div className="flex items-center gap-6 text-[11px] font-medium text-blue-100/90">
+              <a href="mailto:info@unesco.org.zw" className="flex items-center gap-1.5 hover:text-white transition-colors">
+                <Mail className="h-3 w-3" /> info@unesco.org.zw
               </a>
-              <span className="flex items-center gap-1.5">
-                <Phone className="h-3.5 w-3.5" />
-                +263 242 790 741
-              </span>
+              <a href="tel:+263242790741" className="flex items-center gap-1.5 hover:text-white transition-colors">
+                <Phone className="h-3 w-3" /> +263 242 790 741
+              </a>
             </div>
-
-            {/* Divider */}
-            <div className="h-5 w-px bg-white/20" />
-
-            {/* Social icons — glass & gold */}
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2 mt-1">
               {socialLinks.map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
                   href={href}
-                  aria-label={label}
-                  className="social-glow flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 border border-white/15 text-primary-foreground/80 hover:text-accent hover:border-accent/40 backdrop-blur-sm"
+                  className="p-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-accent hover:border-accent hover:text-white transition-all duration-300"
                 >
-                  <Icon className="h-3.5 w-3.5" />
+                  <Icon className="h-3 w-3" />
                 </a>
               ))}
             </div>
           </div>
-
-          {/* Mobile: minimal branding */}
-          <div className="md:hidden">
-            <span className="font-humanist text-xs text-primary-foreground/80 tracking-wide">UNESCO Zimbabwe</span>
-          </div>
         </div>
       </div>
 
-      {/* Main navigation bar — frosted glass */}
-      <div className="glass-panel-light border-b border-border/50 shadow-sm">
-        <div className="container flex h-12 items-center justify-between gap-4">
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-0.5 flex-1" aria-label="Main navigation">
+      {/* Main Nav: Navigation Links */}
+      <div className={`backdrop-blur-xl border-b border-white/20 transition-all duration-300 ${scrolled ? "bg-white/90 py-1" : "bg-white/70 py-2"}`}>
+        <div className="container flex h-12 items-center justify-between">
+          <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-300 ${
-                  isActive(link.path)
-                    ? "text-primary bg-primary/8"
-                    : "text-foreground/70 hover:text-primary hover:bg-primary/5"
+                className={`group relative px-4 py-2 text-[13px] font-semibold transition-all duration-300 ${
+                  isActive(link.path) ? "text-primary" : "text-slate-600 hover:text-primary"
                 }`}
               >
                 {link.label}
-                {isActive(link.path) && (
-                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-6 rounded-full bg-accent" />
-                )}
+                <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-accent transition-transform duration-300 origin-left ${
+                  isActive(link.path) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                }`} />
               </Link>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" onClick={() => setSearchOpen(!searchOpen)} aria-label="Search" className="text-foreground/60 hover:text-primary">
-              <Search className="h-4 w-4" />
-            </Button>
-            <Button variant="ghost" size="icon" className="lg:hidden text-foreground/60" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
-              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center bg-slate-100 rounded-full px-3 py-1 border border-slate-200 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+              <Search className="h-3.5 w-3.5 text-slate-400" />
+              <input 
+                type="text" 
+                placeholder="Search..." 
+                className="bg-transparent border-none text-xs w-24 focus:w-40 transition-all duration-500 focus:outline-none ml-2 text-slate-700"
+              />
+            </div>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="lg:hidden text-slate-600" 
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
+              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
       </div>
-
-      {/* Search bar */}
-      {searchOpen && (
-        <div className="glass-panel-light border-b border-border/50 animate-fade-in">
-          <div className="container py-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="search"
-                placeholder="Search news, events, publications..."
-                className="w-full rounded-lg border border-input bg-background/80 py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-ring backdrop-blur-sm"
-                autoFocus
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Mobile nav */}
-      {mobileOpen && (
-        <nav className="glass-panel-light border-b border-border/50 lg:hidden animate-fade-in" aria-label="Mobile navigation">
-          <div className="container py-3 space-y-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setMobileOpen(false)}
-                className={`block rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
-                  isActive(link.path) ? "text-primary bg-primary/8" : "text-foreground/70 hover:bg-muted"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            {/* Mobile social */}
-            <div className="flex items-center gap-2 pt-3 border-t border-border/50">
-              {socialLinks.map(({ icon: Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
-            </div>
-          </div>
-        </nav>
-      )}
     </header>
   );
 };
