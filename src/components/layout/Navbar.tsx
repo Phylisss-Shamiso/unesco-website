@@ -36,12 +36,17 @@ const Navbar = () => {
       <div className="brushed-metal relative">
         <div className="container flex items-center justify-between py-2.5 relative z-10">
           {/* Full branded name */}
-          <Link to="/" className="flex items-center gap-3 group" aria-label="Home">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/15 border border-white/20 text-sm font-extrabold text-primary-foreground shadow-lg backdrop-blur-sm">
-              UN
+          <Link to="/" className="flex items-center gap-4 group" aria-label="Home">
+            {/* Replaced UN text with UNESCO Logo Icon */}
+            <div className="flex items-center justify-center">
+              <img 
+                src="https://www.unesco.org/sites/default/files/styles/paragraph_medium_desktop/public/2021-10/UNESCO_logo_hor_blue_transparent.png.webp?itok=j_ahsDi8" 
+                alt="UNESCO Logo" 
+                className="h-10 w-auto object-contain brightness-0 invert" 
+              />
             </div>
             <div className="hidden md:block">
-              <span className="font-humanist text-sm md:text-base font-semibold text-primary-foreground tracking-wide leading-tight block">
+              <span className="font-humanist text-sm md:text-base font-bold text-primary-foreground tracking-wide leading-tight block">
                 Zimbabwe National Commission for UNESCO
               </span>
               <span className="font-humanist text-[11px] text-primary-foreground/60 tracking-widest uppercase">

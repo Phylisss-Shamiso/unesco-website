@@ -13,11 +13,15 @@ const Footer = () => (
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground text-sm font-extrabold shadow-lg">
-                UN
+              <div className="flex items-center justify-center">
+                <img 
+                  src="https://www.unesco.org/sites/default/files/styles/paragraph_medium_desktop/public/2021-10/UNESCO_logo_hor_blue_transparent.png.webp?itok=j_ahsDi8" 
+                  alt="UNESCO Logo" 
+                  className="h-12 w-auto object-contain" 
+                />
               </div>
               <div className="leading-tight">
-                <span className="text-sm font-display font-bold text-primary-foreground">ZNCU</span>
+                <span className="text-sm font-display font-bold text-primary-foreground">Zimbabwe</span>
                 <span className="block text-[10px] text-primary-foreground/50 font-humanist tracking-wider uppercase">Official Secretariat</span>
               </div>
             </div>
@@ -74,13 +78,26 @@ const Footer = () => (
             <ul className="space-y-3.5 text-sm text-primary-foreground/60">
               <li className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-accent" />
-                <span>16 Cork Road, Belgravia<br />Harare, Zimbabwe</span>
+                <span className="leading-relaxed">
+                  8 Kenilworth Road<br />
+                  Newlands Highlands<br />
+                  Harare<br />
+                  {/* Replaced emoji with an inline image flag */}
+                  <span className="inline-flex items-center gap-2 mt-1">
+                    <img 
+                      src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Flag_of_Zimbabwe.svg" 
+                      alt="Flag of Zimbabwe" 
+                      className="h-3 w-6 object-cover rounded-[2px]"
+                    />
+                    Zimbabwe
+                  </span>
+                </span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 flex-shrink-0 text-accent" />
                 <span>+263 242 790 741</span>
               </li>
-              <li className="flex items-center gap-2.5">
+              <li className="flex items-center gap-2.5 mb-4">
                 <Mail className="h-4 w-4 flex-shrink-0 text-accent" />
                 <a href="mailto:info@unesco.org.zw" className="hover:text-primary-foreground transition-colors">info@unesco.org.zw</a>
               </li>
