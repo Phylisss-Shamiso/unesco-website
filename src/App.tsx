@@ -14,7 +14,7 @@ import EventsPage from "@/pages/EventsPage";
 import PublicationsPage from "@/pages/PublicationsPage";
 import MediaPage from "@/pages/MediaPage";
 import ContactPage from "@/pages/ContactPage";
-
+import CommemorationsPage from "@/pages/CommemorationsPage";
 import AdminLogin from "@/pages/admin/AdminLogin";
 import AdminLayout from "@/pages/admin/AdminLayout";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
@@ -24,6 +24,7 @@ import AdminEvents from "@/pages/admin/AdminEvents";
 import AdminPublications from "@/pages/admin/AdminPublications";
 import AdminMedia from "@/pages/admin/AdminMedia";
 import AdminUsers from "@/pages/admin/AdminUsers";
+import AdminCommemorations from "@/pages/admin/Admin Commemorations";
 
 import NotFound from "@/pages/NotFound";
 
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/publications" element={<PublicationsPage />} />
             <Route path="/media" element={<MediaPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/commemorations" element={<CommemorationsPage />} />
           </Route>
 
           {/* Admin routes */}
@@ -59,6 +61,7 @@ const App = () => (
             <Route path="publications" element={<AdminPublications />} />
             <Route path="media" element={<AdminMedia />} />
             <Route path="users" element={<AdminUsers />} />
+            <Route path="commemorations" element={<AdminCommemorations/>} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

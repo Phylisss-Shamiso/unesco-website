@@ -12,6 +12,8 @@ const sidebarLinks = [
   { label: "Events", path: "/admin/events", icon: CalendarDays },
   { label: "Publications", path: "/admin/publications", icon: BookOpen },
   { label: "Media", path: "/admin/media", icon: Image },
+  { label: "Commemorations", path: "/admin/commemorations", icon: Image },
+  
   { label: "Users", path: "/admin/users", icon: Users },
 ];
 

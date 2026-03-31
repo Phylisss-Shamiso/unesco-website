@@ -1,4 +1,4 @@
-import { Plus, Edit, Trash2, Download } from "lucide-react";
+import { Plus, Edit, Trash2, Download, Archive } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { publications } from "@/api/mockData";
 
@@ -28,6 +28,7 @@ const AdminPublications = () => (
                 <div className="flex justify-end gap-1">
                   <Button variant="ghost" size="icon" aria-label="Edit"><Edit className="h-4 w-4" /></Button>
                   <Button variant="ghost" size="icon" aria-label="Delete"><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                  <Button variant="ghost" size="icon" aria-label="Archive"><Archive className="h-4 w-4" /></Button>
                 </div>
               </td>
             </tr>
